@@ -1,0 +1,16 @@
+.footer {
+  height: 10rem;
+  background-color: teal;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 4rem;
+  color: white;
+  font-family: "Varela Round", sans-serif;
+}
+
+.footer_copyright {
+  margin-top: 1rem;
+  font-style: italic;
+}

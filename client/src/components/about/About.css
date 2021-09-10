@@ -1,0 +1,33 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10rem;
+}
+
+.about_title {
+  color: teal;
+  font-size: 2rem;
+  font-family: "Varela Round", sans-serif;
+  text-align: center;
+  font-weight: 500;
+}
+.about_desc {
+  font-style: italic;
+  font-style: 1.3rem;
+  text-align: center;
+  margin: 1rem 0;
+  line-height: 1.5rem;
+}
+.about_link {
+  border: 2px solid rgb(17, 87, 77);
+  padding: 1rem;
+  color: teal;
+  text-decoration: none;
+}
+.about_link:hover {
+  text-decoration: none;
+  background-color: rgba(108, 211, 211, 0.2);
+  border: 4px solid rgb(17, 87, 77);
+}
