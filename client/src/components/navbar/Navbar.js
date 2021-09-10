@@ -89,7 +89,7 @@ export default function NavBar() {
               </Link>
             </li>
             <li className="topListItem">
-              <Link className="link" to="/settings">
+              <Link className="link" to="/write">
                 Write
               </Link>
             </li>

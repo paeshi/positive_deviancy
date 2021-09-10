@@ -27,7 +27,7 @@ function App() {
           <Single />
         </Route>
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }

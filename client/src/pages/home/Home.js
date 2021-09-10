@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../../components/header/Header";
 import Posts from "../../components/posts/Posts";
 import Sidebar from "../../components/sidebar/Sidebar";
+import Footer from "../../components/footer/Footer";
 import About from "../../components/about/About";
 import "./Home.css";
 import axios from "axios";
@@ -19,13 +20,15 @@ export default function Home() {
     fetchPosts();
   }, [search]);
   return (
-    <>
+    <div className="home-container">
       <Header />
       <About />
-      <div className="home">
+
+      <div className="articles">
         <Posts posts={posts} />
         <Sidebar />
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }

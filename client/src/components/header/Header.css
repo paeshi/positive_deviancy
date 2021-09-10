@@ -4,8 +4,8 @@
   height: 30rem;
   background: linear-gradient(
       0deg,
-      rgba(26, 151, 143, 0.3),
-      rgba(46, 245, 215, 0.3)
+      rgba(38, 126, 121, 0.3),
+      rgba(0, 247, 210, 0.3)
     ),
     url("../../assets/images/banner.jpg");
   background-size: cover;
@@ -21,7 +21,7 @@
 
 .headerTitleLg {
   position: absolute;
-  top: 20%;
+  top: 10rem;
   font-size: 100px;
   font-family: "Fira Sans", sans-serif;
   font-weight: 800;

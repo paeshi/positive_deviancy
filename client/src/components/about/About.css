@@ -4,24 +4,25 @@
   align-items: center;
   justify-content: center;
   margin: 10rem;
+  font-family: "Varela Round", sans-serif;
 }
 
 .about_title {
   color: teal;
   font-size: 2rem;
-  font-family: "Varela Round", sans-serif;
   text-align: center;
   font-weight: 500;
 }
 .about_desc {
   font-style: italic;
-  font-style: 1.3rem;
+  font-size: 1.2rem;
   text-align: center;
-  margin: 1rem 0;
+  margin: 3rem 0;
   line-height: 1.5rem;
 }
 .about_link {
   border: 2px solid rgb(17, 87, 77);
+  font-size: 1.5rem;
   padding: 1rem;
   color: teal;
   text-decoration: none;
