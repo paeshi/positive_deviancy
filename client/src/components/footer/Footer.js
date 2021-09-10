@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="footer">
       <h3 className="footer_message">
         <a href="mailto:jade@positivedeviancy.com">
-          <i class="far fa-envelope"></i> Contact Us
+          <i className="far fa-envelope"></i> Contact Us
         </a>
       </h3>
 

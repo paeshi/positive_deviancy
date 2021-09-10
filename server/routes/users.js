@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const Post = require("../models/Post");
 const bcrypt = require("bcrypt");
+// const { verify } = require("../utils/Auth");
 
 //UPDATE
 router.put("/:id", async (req, res) => {

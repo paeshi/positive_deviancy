@@ -35,6 +35,23 @@ const Reducer = (state, action) => {
         isFetching: false,
         error: true,
       };
+    case "DELETE_START":
+      return {
+        ...state,
+        isFetching: false,
+      };
+    case "DELETE_SUCCESS":
+      return {
+        user: action.payload,
+        isFetching: false,
+        error: false,
+      };
+    case "DELETE_FAILURE":
+      return {
+        user: state.user,
+        isFetching: false,
+        error: true,
+      };
     case "LOGOUT":
       return {
         user: null,
