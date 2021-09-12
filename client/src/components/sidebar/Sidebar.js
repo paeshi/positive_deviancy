@@ -1,39 +1,28 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./Sidebar.css";
 import energy from "../../assets/images/energy.jpg";
+import Timer from "../timer/Timer";
 
 export default function Sidebar() {
-  const [cats, setCats] = useState([]);
+  const startDate = new Date("October 5, 2021 5:00").getTime();
 
-  useEffect(() => {
-    const getCats = async () => {
-      const res = await axios.get("/categories");
-      setCats(res.data);
-    };
-    getCats();
-  }, []);
   return (
     <div className="sidebar">
       <div className="sidebarItem">
-        <span className="sidebarTitle">ABOUT ME</span>
+        <span className="sidebarTitle">
+          Countdown until the Solar Prize Round 5 Hardware & Software Tracks
+          Submissions are Due! (October 5th 2021 5pm EST)
+        </span>
+        <Timer startDate={startDate} />
         <img src={energy} alt="solar panels" className="sidebar_img" />
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate qui
-          necessitatibus nostrum illum reprehenderit.
+          The American-Made Solar Prize is all about encouraging the
+          entrepreneurial/inventor spirit in brilliant innovators looking to
+          make an impact on a cleaner, solar-based future. We want to help
+          people like YOU bring your ideas to life through the Solar Prize Round
+          5, where you can win cash prizes to further your innovation.
         </p>
       </div>
-      <div className="sidebarItem">
-        <span className="sidebarTitle">CATEGORIES</span>
-        <ul className="sidebarList">
-          {cats.map((c) => (
-            <Link to={`/?cat=${c.name}`} className="link">
-              <li className="sidebarListItem">{c.name}</li>
-            </Link>
-          ))}
-        </ul>
-      </div>
+
       <div className="sidebarItem">
         <span className="sidebarTitle">FOLLOW US</span>
         <div className="sidebarSocial">

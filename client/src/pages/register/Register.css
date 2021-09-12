@@ -4,11 +4,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    url("https://images.pexels.com/photos/317355/pexels-photo-317355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background: linear-gradient(rgba(64, 154, 137, 0.5), rgba(9, 228, 221, 0.5)),
+    url("../../assets/images/banner.jpg");
   background-size: cover;
 }
 

@@ -1,10 +1,10 @@
-import { useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Context } from "../../context/Context";
 import "./Navbar.css";
 
 export default function NavBar() {
-  const { user, dispatch } = useContext(Context);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const PF = "http://localhost:5000/images/";
 
   const handleLogout = () => {
@@ -60,20 +60,11 @@ export default function NavBar() {
               AM NETWORK
             </a>
           </li>
-          {/* <li className="topListItem">
-            <Link className="link" to="/">
-              ABOUT US
-            </Link>
-          </li> */}
           <li className="topListItem">
             <Link className="link" to="/">
               CONTACT
             </Link>
           </li>
-
-          {/* <li className="topListItem" onClick={handleLogout}>
-            {user && "LOGOUT"}
-          </li> */}
         </ul>
       </div>
       <div className="topRight">
@@ -111,7 +102,6 @@ export default function NavBar() {
             </li>
           </ul>
         )}
-        {/* <i className="topSearchIcon fas fa-search"></i> */}
       </div>
     </div>
   );

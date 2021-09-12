@@ -1,13 +1,18 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import "./Write.css";
 import axios from "axios";
-import { Context } from "../../context/Context";
+
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 export default function Write() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
-  const { user } = useContext(Context);
+  const [category, setCategory] = useState("");
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,6 +20,7 @@ export default function Write() {
       username: user.username,
       title,
       desc,
+      category,
     };
     if (file) {
       const data = new FormData();
@@ -28,7 +34,7 @@ export default function Write() {
     }
     try {
       const res = await axios.post("/posts", newPost);
-      window.location.replace("/post/" + res.data._id);
+      history.push("/post/" + res.data._id);
     } catch (err) {}
   };
   return (
@@ -53,6 +59,14 @@ export default function Write() {
             className="writeInput"
             autoFocus={true}
             onChange={(e) => setTitle(e.target.value)}
+          />
+
+          <input
+            type="text"
+            placeholder="Category"
+            className="writeInput"
+            autoFocus={true}
+            onChange={(e) => setCategory(e.target.value)}
           />
         </div>
         <div className="writeFormGroup">

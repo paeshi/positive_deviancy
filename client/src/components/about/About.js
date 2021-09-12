@@ -1,9 +1,10 @@
 import React from "react";
 import "./About.css";
+import withClass from "../../hoc/withClass";
 
-export default function About() {
+function About() {
   return (
-    <div className="about">
+    <>
       <h3 className="about_title">
         We are an American Made Network Connector Organization that helps
         Inventors and Startups
@@ -22,6 +23,8 @@ export default function About() {
       >
         American Made Prize Challenges
       </a>
-    </div>
+    </>
   );
 }
+
+export default withClass(About, "about");

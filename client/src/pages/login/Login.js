@@ -1,13 +1,18 @@
 import axios from "axios";
-import { useContext, useRef } from "react";
+import { useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Context } from "../../context/Context";
-import "./Login.css";
 
-export default function Login() {
+import "./Login.css";
+import withErrorHandler from "../../hoc/withErrorHandler";
+
+function Login() {
   const userRef = useRef();
   const passwordRef = useRef();
-  const { dispatch, isFetching } = useContext(Context);
+
+  const dispatch = useDispatch();
+  const isFetching = useSelector((state) => state.isFetching);
+  const user = useSelector((state) => state.user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,3 +58,5 @@ export default function Login() {
     </div>
   );
 }
+
+export default withErrorHandler(Login, axios);

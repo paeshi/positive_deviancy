@@ -1,0 +1,25 @@
+.timer {
+  display: flex;
+  font-size: 1rem;
+  justify-content: center;
+}
+.timer > div {
+  padding: 0.5rem;
+  background: rgba(44, 138, 129, 0.9);
+  color: #fff;
+  font-size: 0.9rem;
+  margin-right: 2px;
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.expired {
+  font-size: 20px;
+  color: rgb(126, 49, 49);
+  border: 1px solid rgb(126, 49, 49);
+  padding: 20px;
+}

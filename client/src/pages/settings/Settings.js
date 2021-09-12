@@ -1,17 +1,21 @@
 import "./Settings.css";
 import Sidebar from "../../components/sidebar/Sidebar";
-import { useContext, useState } from "react";
-import { Context } from "../../context/Context";
+import { useState } from "react";
+
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 export default function Settings() {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const [file, setFile] = useState(null);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const { user, dispatch } = useContext(Context);
   const PF = "http://localhost:5000/images/";
 
   const handleSubmit = async (e) => {
@@ -42,22 +46,22 @@ export default function Settings() {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async () => {
     dispatch({ type: "DELETE_START" });
-    await axios.delete("/users/" + id, {
-      headers: { authorization: "Bearer " + user.id },
-    });
+    try {
+      await axios.delete(`/users/${user._id}`, {});
+      history.push("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className="settings">
       <div className="settingsWrapper">
         <div className="settingsTitle">
           <span className="settingsUpdateTitle">Update Your Account</span>
-          {console.log(user)}
-          <span
-            className="settingsDeleteTitle"
-            onClick={() => handleDelete(user._id)}
-          >
+          {console.log(user._id)}
+          <span className="settingsDeleteTitle" onClick={handleDelete}>
             Delete Account
           </span>
         </div>

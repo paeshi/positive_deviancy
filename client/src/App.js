@@ -1,17 +1,16 @@
 import Home from "./pages/home/Home";
 import Navbar from "./components/navbar/Navbar";
-import Footer from "./components/footer/Footer";
 import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
 import Settings from "./pages/settings/Settings";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useContext } from "react";
-import { Context } from "./context/Context";
+import { useSelector } from "react-redux";
 
 function App() {
-  const { user } = useContext(Context);
+  const user = useSelector((state) => state.user);
+
   return (
     <Router>
       <Navbar />
@@ -27,7 +26,6 @@ function App() {
           <Single />
         </Route>
       </Switch>
-      {/* <Footer /> */}
     </Router>
   );
 }
