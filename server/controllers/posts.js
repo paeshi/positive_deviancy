@@ -35,7 +35,7 @@ exports.updateController = async (req, res) => {
 };
 
 exports.deleteController = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const post = await Post.findById(req.params.id);
     if (post.username === req.body.username) {
@@ -64,17 +64,11 @@ exports.getController = async (req, res) => {
 
 exports.getAllController = async (req, res) => {
   const username = req.query.user;
-  //   const catName = req.query.cat;
+
   try {
     let posts;
     if (username) {
       posts = await Post.find({ username });
-      // } else if (catName) {
-      //   posts = await Post.find({
-      //     categories: {
-      //       $in: [catName],
-      //     },
-      //   });
     } else {
       posts = await Post.find();
     }

@@ -9,11 +9,7 @@ const {
   getAllController,
 } = require("../controllers/posts.js");
 
-const {
-  authPage,
-  adminMiddleware,
-  admin,
-} = require("../middleware/middleware.js");
+const { authPage, adminMiddleware } = require("../middleware/middleware.js");
 
 //CREATE POST
 router.post("/", createController);
