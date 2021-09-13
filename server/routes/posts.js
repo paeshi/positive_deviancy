@@ -15,10 +15,10 @@ const { authPage, adminMiddleware } = require("../middleware/middleware.js");
 router.post("/", createController);
 
 //UPDATE POST
-router.put("/:id", updateController);
+router.put("/:id", adminMiddleware, updateController);
 
 //DELETE POST
-router.delete("/:id", deleteController);
+router.delete("/:id", adminMiddleware, deleteController);
 
 //GET POST
 router.get("/:id", getController);

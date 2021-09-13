@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 
 const adminMiddleware = (req, res, next) => {
   User.findById({ id: req.params.id }).exec((err, user) => {
