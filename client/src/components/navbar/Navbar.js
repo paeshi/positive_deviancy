@@ -46,6 +46,14 @@ export default function NavBar() {
       </div>
       <div className="topCenter">
         <ul className="topList">
+          {user && user.role === "admin" && (
+            <li className="topListItem">
+              <Link className="link" to="/admin">
+                ADMIN
+              </Link>
+            </li>
+          )}
+
           <li className="topListItem">
             <Link className="link" to="/">
               HOME
@@ -59,11 +67,6 @@ export default function NavBar() {
             >
               AM NETWORK
             </a>
-          </li>
-          <li className="topListItem">
-            <Link className="link" to="/">
-              CONTACT
-            </Link>
           </li>
         </ul>
       </div>

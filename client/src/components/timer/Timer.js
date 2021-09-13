@@ -26,7 +26,7 @@ class Timer extends Component {
 
   timerInit = () => {
     const { startDate } = this.props;
-    console.log(startDate);
+
     const now = new Date().getTime();
     if (!startDate) {
       this.setState({ expired: true });

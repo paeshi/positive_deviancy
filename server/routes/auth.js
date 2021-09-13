@@ -12,6 +12,8 @@ router.post("/register", userSignupValidator, runValidation, register);
 
 router.post("/login", login);
 
+module.exports = router;
+
 // router.post("/login", async (req, res) => {
 //   try {
 //     const user = await User.findOne({ username: req.body.username });
@@ -92,5 +94,3 @@ router.post("/login", login);
 //     res.status(401).json("You are not authenticated");
 //   }
 // };
-
-module.exports = router;

@@ -2,16 +2,15 @@ import { useState } from "react";
 import "./Write.css";
 import axios from "axios";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 export default function Write() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
-  const [category, setCategory] = useState("");
   const history = useHistory();
-  const dispatch = useDispatch();
+
   const user = useSelector((state) => state.user);
 
   const handleSubmit = async (e) => {
@@ -20,7 +19,6 @@ export default function Write() {
       username: user.username,
       title,
       desc,
-      category,
     };
     if (file) {
       const data = new FormData();
@@ -59,14 +57,6 @@ export default function Write() {
             className="writeInput"
             autoFocus={true}
             onChange={(e) => setTitle(e.target.value)}
-          />
-
-          <input
-            type="text"
-            placeholder="Category"
-            className="writeInput"
-            autoFocus={true}
-            onChange={(e) => setCategory(e.target.value)}
           />
         </div>
         <div className="writeFormGroup">

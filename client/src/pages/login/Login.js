@@ -12,7 +12,6 @@ function Login() {
 
   const dispatch = useDispatch();
   const isFetching = useSelector((state) => state.isFetching);
-  const user = useSelector((state) => state.user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

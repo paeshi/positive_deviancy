@@ -61,7 +61,7 @@ export default function Register() {
       </button>
       {error && (
         <span style={{ color: "red", marginTop: "10px" }}>
-          Something went wrong!
+          All fields must be included, password must be at least 5 characters!
         </span>
       )}
     </div>

@@ -1,5 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const expressJwt = require("express-jwt");
 
 // REGISTER WITHOUT EMAIL CONFIRMATION
 exports.register = async (req, res) => {
@@ -39,3 +41,7 @@ exports.login = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
+// exports.requireSignin = expressJwt({
+//   secret: process.env.JWT_SECRET, // req.user._id
+// });

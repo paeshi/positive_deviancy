@@ -2,13 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./SinglePost.css";
 
 export default function SinglePost() {
   const history = useHistory();
-  const dispatch = useDispatch();
+
   const user = useSelector((state) => state.user);
   const location = useLocation();
   const path = location.pathname.split("/")[2];
@@ -65,6 +65,7 @@ export default function SinglePost() {
         ) : (
           <h1 className="singlePostTitle">
             {title}
+            {/* user? */}
             {post.username === user?.username && (
               <div className="singlePostEdit">
                 <i
