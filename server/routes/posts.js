@@ -9,16 +9,16 @@ const {
   getAllController,
 } = require("../controllers/posts.js");
 
-const { authPage, adminMiddleware } = require("../middleware/middleware.js");
+const { auth } = require("../middleware/middleware.js");
 
 //CREATE POST
 router.post("/", createController);
 
 //UPDATE POST
-router.put("/:id", adminMiddleware, updateController);
+router.put("/:id", auth, updateController);
 
 //DELETE POST
-router.delete("/:id", adminMiddleware, deleteController);
+router.delete("/:id", auth, deleteController);
 
 //GET POST
 router.get("/:id", getController);

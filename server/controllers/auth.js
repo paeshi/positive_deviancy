@@ -22,10 +22,23 @@ exports.register = async (req, res) => {
   }
 };
 
-// REGISTER WITH EMAIL CONFIRMATION
-// exports.register = async (req, res) => {
+const generateAccessToken = (user) => {
+  return jwt.sign(
+    { _id: user._id, role: user.role },
+    process.env.TOKEN_SECRET,
+    {
+      expiresIn: "15m",
+    }
+  );
+};
+const generateRefreshToken = (user) => {
+  return jwt.sign(
+    { _id: user._id, role: user.role },
+    process.env.TOKEN_REFRESH
+  );
+};
 
-// }
+let refreshTokens = [];
 
 exports.login = async (req, res) => {
   try {
@@ -34,14 +47,46 @@ exports.login = async (req, res) => {
 
     const validated = await bcrypt.compare(req.body.password, user.password);
     !validated && res.status(400).json("Wrong credentials!");
+    const accessToken = generateAccessToken(user);
+    const refreshToken = generateRefreshToken(user);
+    refreshTokens.push(refreshToken);
+    res.json({
+      _id: user._id,
+      username: user.username,
+      role: user.role,
+      accessToken,
+      refreshToken,
+    });
+    // const { password, ...args } = user._doc;
 
-    const { password, ...args } = user._doc;
-    res.status(200).json(args);
+    // res.status(200).json(args);
   } catch (err) {
     res.status(500).json(err);
   }
 };
 
-// exports.requireSignin = expressJwt({
-//   secret: process.env.JWT_SECRET, // req.user._id
-// });
+exports.refresh = async (req, res) => {
+  const refreshToken = req.body.token;
+
+  if (!refreshToken) return res.status(401).json("Not Authenticated");
+  if (!refreshTokens.includes(refreshToken)) {
+    return res.status(403).json("Refresh token is not valid!");
+  }
+  jwt.verify(refreshToken, process.env.TOKEN_REFRESH, (err, user) => {
+    err && console.log(err);
+    refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+    const newAccessToken = generateAccessToken(user);
+    const newRefreshToken = generateRefreshToken(user);
+    refreshTokens.push(newRefreshToken);
+    res.status(200).json({
+      accessToken: newAccessToken,
+      refreshToken: newRefreshToken,
+    });
+  });
+};
+
+exports.logout = async (req, res) => {
+  const refreshToken = req.body.token;
+  refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+  res.status(200).json("You logged out sucessfully");
+};

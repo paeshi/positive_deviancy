@@ -1,37 +1,53 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
-const adminMiddleware = (req, res, next) => {
-  User.findById({ id: req.params.id }).exec((err, user) => {
-    if (err || !user) {
-      return res.status(400).json({
-        error: "User not found",
-      });
-    }
+// function auth(req, res, next) {
+//   const token = req.header("auth-token");
+//   if (!token) return res.status(401).send("Access Denied");
+//   try {
+//     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+//     req.user = verified;
+//     next();
+//   } catch (err) {
+//     res.status(400).send("Invalid Token");
+//   }
+// }
 
-    if (user.role !== "admin") {
-      return res.status(400).json({
-        error: "Admin resource. Access denied.",
-      });
-    }
+const auth = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
 
-    req.profile = user;
-    next();
-  });
-};
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+      if (err) {
+        return res.status(403).json("Token is not valid!");
+      }
 
-const authPage = (permissions) => {
-  return (req, res, next) => {
-    const userRole = req.body.role;
-    if (permissions.includes(userRole)) {
+      req.user = user;
       next();
-    } else {
-      return res.status(401).json("You don't have permission");
-    }
-  };
+    });
+  } else {
+    res.status(401).json("You are not authenticated!");
+  }
 };
+
+// function auth(req, res, next) {
+//   let token = req.header("authorization");
+//   if (!token) return res.status(401).send("Access Denied!");
+
+//   if (token.startsWith("Bearer ")) {
+//     token = token.slice(7, token.length);
+//   }
+
+//   try {
+//     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+//     req.user = verified;
+//     next();
+//   } catch (err) {
+//     res.status(400).send("Invalid Token!");
+//   }
+// }
 
 module.exports = {
-  authPage,
-  adminMiddleware,
+  auth,
 };

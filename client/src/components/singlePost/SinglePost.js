@@ -30,26 +30,40 @@ export default function SinglePost() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/posts/${post._id}`, {
+      await authAxios.delete(`/posts/${post._id}`, {
         data: { username: user.username },
       });
       history.push("/");
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  const authAxios = axios.create({
+    url: `/posts/${post._id}`,
+    headers: {
+      authorization: `Bearer ${user.accessToken}`,
+    },
+  });
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`/posts/${post._id}`, {
+      await authAxios.put(`/posts/${post._id}`, {
         username: user.username,
         title,
         desc,
       });
       setUpdateMode(false);
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <div className="singlePost">
+      {console.log(user)}
+      {console.log(post)}
+
       <div className="singlePostWrapper">
         {post.photo && (
           <img src={PF + post.photo} alt="" className="singlePostImg" />
@@ -66,18 +80,19 @@ export default function SinglePost() {
           <h1 className="singlePostTitle">
             {title}
             {/* user? */}
-            {post.username === user?.username && (
-              <div className="singlePostEdit">
-                <i
-                  className="singlePostIcon far fa-edit"
-                  onClick={() => setUpdateMode(true)}
-                ></i>
-                <i
-                  className="singlePostIcon far fa-trash-alt"
-                  onClick={handleDelete}
-                ></i>
-              </div>
-            )}
+            {post.username === user?.username ||
+              (user?.role === "admin" && (
+                <div className="singlePostEdit">
+                  <i
+                    className="singlePostIcon far fa-edit"
+                    onClick={() => setUpdateMode(true)}
+                  ></i>
+                  <i
+                    className="singlePostIcon far fa-trash-alt"
+                    onClick={handleDelete}
+                  ></i>
+                </div>
+              ))}
           </h1>
         )}
         <div className="singlePostInfo">

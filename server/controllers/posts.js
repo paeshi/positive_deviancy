@@ -1,4 +1,5 @@
 const Post = require("../models/Post");
+const User = require("../models/User");
 
 exports.createController = async (req, res) => {
   const newPost = new Post(req.body);
@@ -12,8 +13,11 @@ exports.createController = async (req, res) => {
 
 exports.updateController = async (req, res) => {
   try {
+    const user = await User.findOne({ username: req.body.username });
+
     const post = await Post.findById(req.params.id);
-    if (post.username === req.body.username) {
+    console.log(user);
+    if (post.username === req.body.username || user.role === "admin") {
       try {
         const updatedPost = await Post.findByIdAndUpdate(
           req.params.id,
@@ -37,8 +41,10 @@ exports.updateController = async (req, res) => {
 exports.deleteController = async (req, res) => {
   // console.log(req.body);
   try {
+    const user = await User.findOne({ username: req.body.username });
     const post = await Post.findById(req.params.id);
-    if (post.username === req.body.username) {
+    console.log(user);
+    if (post.username === req.body.username || user.role === "admin") {
       try {
         await post.delete();
         res.status(200).json("Post has been deleted...");
