@@ -11,14 +11,14 @@ export default function NavBar() {
     dispatch({ type: "LOGOUT" });
   };
   return (
-    <div className="top">
-      <div className="topLeft">
+    <nav className="nav">
+      <div className="navLeft">
         <a
           href="https://www.facebook.com/PositiveDVNC/"
           target="_blank"
           rel="noreferrer"
         >
-          <i className="topIcon fab fa-facebook-square"></i>
+          <i className="navIcon fab fa-facebook-square"></i>
         </a>
 
         <a
@@ -26,7 +26,7 @@ export default function NavBar() {
           target="_blank"
           rel="noreferrer"
         >
-          <i className="topIcon fab fa-twitter-square"></i>
+          <i className="navIcon fab fa-twitter-square"></i>
         </a>
 
         <a
@@ -34,32 +34,32 @@ export default function NavBar() {
           target="_blank"
           rel="noreferrer"
         >
-          <i className="topIcon fab fa-linkedin-in"></i>{" "}
+          <i className="navIcon fab fa-linkedin-in"></i>{" "}
         </a>
         <a
           href="https://www.instagram.com/positiveDVNC/"
           target="_blank"
           rel="noreferrer"
         >
-          <i className="topIcon fab fa-instagram-square"></i>
+          <i className="navIcon fab fa-instagram-square"></i>
         </a>
       </div>
-      <div className="topCenter">
-        <ul className="topList">
+      <div className="navCenter">
+        <ul className="navList">
           {user && user.role === "admin" && (
-            <li className="topListItem">
+            <li className="navListItem">
               <Link className="link" to="/admin">
                 ADMIN
               </Link>
             </li>
           )}
 
-          <li className="topListItem">
+          <li className="navListItem">
             <Link className="link" to="/">
               HOME
             </Link>
           </li>
-          <li className="topListItem">
+          <li className="navListItem">
             <a
               href="https://americanmadechallenges.org/"
               target="_blank"
@@ -70,35 +70,35 @@ export default function NavBar() {
           </li>
         </ul>
       </div>
-      <div className="topRight">
+      <div className="navRight">
         {user ? (
-          <ul className="topList">
-            <li className="topListItem">
+          <ul className="navList">
+            <li className="navListItem">
               <Link className="link" to="/settings">
                 <img
-                  className="topImg"
+                  className="navImg"
                   src={PF + user.profilePic}
                   alt="profile"
                 />
               </Link>
             </li>
-            <li className="topListItem">
+            <li className="navListItem">
               <Link className="link" to="/write">
                 Write
               </Link>
             </li>
-            <li className="topListItem logout" onClick={handleLogout}>
+            <li className="navListItem logout" onClick={handleLogout}>
               Logout
             </li>
           </ul>
         ) : (
-          <ul className="topList">
-            <li className="topListItem">
+          <ul className="navList">
+            <li className="navListItem">
               <Link className="link" to="/login">
                 LOGIN
               </Link>
             </li>
-            <li className="topListItem">
+            <li className="navListItem">
               <Link className="link" to="/register">
                 REGISTER
               </Link>
@@ -106,6 +106,6 @@ export default function NavBar() {
           </ul>
         )}
       </div>
-    </div>
+    </nav>
   );
 }
